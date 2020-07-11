@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libls.h                                            :+:      :+:    :+:   */
+/*   ls_parse_argv.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/11 20:10:03 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/12 02:22:57 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/12 02:14:49 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/12 02:39:22 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBLS_H
+#include "libls.h"
 
-# define LIBLS_H
-
-# include "libft.h"
-
-# define FLAGS_SIZE 128
-# define FLAGS "lRart"
-# define USAGE "usage: ls [-%s] [file ...]"
-# define ILLEGAL_OPT "ls: illegal option -- %c"
-
-typedef struct	s_ls
+int	ls_parse_argv(int ac, char*const av[], t_ls *ls)
 {
-	int			flags[FLAGS_SIZE];
-	char*const	*fnames;
-}				t_ls;
+	int	opt;
 
-int		ls_parse_argv(int ac, char*const av[]);
-
-# endif
+	while ((opt = ft_getopt(ac, av, FLAGS)))
+	{
+		if (opt == '?')
+			return (ERR);
+		else
+			ls->flags[opt] = 1;
+	}
+}
