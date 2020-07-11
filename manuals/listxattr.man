@@ -1,0 +1,32 @@
+#include <sys/xattr.h>
+
+ssize_t listxattr(const char *path, char *namebuf, size_t size, int options);
+
+xtended attributes extend the basic attributes associated with files and
+directories in the file system.  They are stored as name:data pairs associated
+with file system objects (files, directories, symlinks, etc).
+
+listxattr() retrieves a list of names of extended attributes associated with the
+given path in the file system.
+
+namebuf is a data buffer of size bytes for the names of the extended attributes
+associated with path.  The extended attribute names are simple NULL-terminated
+UTF-8 strings and are returned in arbitrary order.  No extra padding is provided
+between names in the buffer.  The list will only include names of extended
+attributes to which the calling process has access.  The function returns the
+size of the list of names.
+
+options controls how the attribute list is generated:
+
+XATTR_NOFOLLOW  do not follow symbolic links.  listxattr() normally lists
+attributes of the target of path if it is a symbolic link.  With this option,
+listxattr() will list attributes of the link itself.
+
+XATTR_SHOWCOMPRESSION
+	listxattr() and flistxattr() will list HFS Plus Compression extended
+	attribute(s) (if present) for the file referred to by path or fd.
+
+If namebuf is set to NULL, the function returns the size of the list of extended
+attribute names.  This facility can be used to determine the size of a buffer
+sufficiently large to hold the names of the attributes currently associated with
+path.

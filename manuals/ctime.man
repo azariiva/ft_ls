@@ -1,0 +1,9 @@
+#include <time.h>
+
+char *ctime(const time_t *clock);
+
+The ctime() function adjusts the time value for the current time zone, in the
+same manner as localtime().  It returns a pointer to a 26-character string of
+the form: "Thu Nov 24 18:22:48 1986\n\0"
+
+All of the fields have constant width.

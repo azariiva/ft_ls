@@ -1,0 +1,9 @@
+#include <unistd.h>
+
+ssize_t readlink(const char *restrict path, char *restrict buf, size_t bufsize);
+
+readlink() places the contents of the symbolic link path in the buffer buf,
+which has size bufsize.  Readlink does not append a NUL character to buf.
+
+The call returns the count of characters placed in the buffer if it succeeds, or
+a -1 if an error occurs, placing the error code in the global variable errno.

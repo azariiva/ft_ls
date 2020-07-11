@@ -1,0 +1,10 @@
+#include <time.h>
+
+time_t time(time_t *tloc);
+
+The time() function returns the value of time in seconds since 0 hours,
+0 minutes, 0 seconds, January 1, 1970, Coordinated Universal Time, without
+including leap seconds.  If an error occurs, time() returns the value
+(time_t)-1.
+
+The return value is also stored in *tloc, provided that tloc is non-null.

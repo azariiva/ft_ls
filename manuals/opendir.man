@@ -1,0 +1,23 @@
+#include <dirent.h>
+
+DIR *opendir(const char *filename);
+
+/* structure describing an open directory. */
+typedef struct _dirdesc {
+		int     __dd_fd;      /* file descriptor associated with directory */
+		long    __dd_loc;     /* offset in current buffer */
+		long    __dd_size;    /* amount of data returned by getdirentries */
+		char    *__dd_buf;    /* data buffer */
+		int     __dd_len;     /* size of data buffer */
+		long    __dd_seek;    /* magic cookie returned by getdirentries */
+		long    __dd_rewind;  /* magic cookie for rewinding */
+		int     __dd_flags;   /* flags for readdir */
+		pthread_mutex_t __dd_lock; /* for thread locking */
+		struct _telldir *__dd_td; /* telldir position recording */
+} DIR;
+
+The opendir() function opens the directory named by filename, associates a
+directory stream with it and returns a pointer to be used to identify the
+directory stream in subsequent operations.  The pointer NULL is returned if
+filename cannot be accessed, or if it cannot malloc(3) enough memory to hold
+the whole thing, and sets the global variable errno to indicate the error.

@@ -1,0 +1,30 @@
+#include <grp.h>
+#include <uuid/uuid.h>
+
+int getgrgid_r(gid_t gid, struct group *grp, char *buffer, size_t bufsize, struct group **result);
+
+These functions obtain information from opendirectoryd(8), including records in
+/etc/group which is described in group(5).  Each line of the database is defined
+by the structure group found in the include file <grp.h>:
+
+struct group {
+		char    *gr_name;       /* group name */
+		char    *gr_passwd;     /* group password */
+		gid_t   gr_gid;         /* group id */
+		char    **gr_mem;       /* group members */
+};
+
+ The functions getgrnam(), getgrgid(), and getgruuid() search the group database
+ for the given group name pointed to by name, the group id given by gid, or the
+ UUID given by uuid respectively, returning the first one encountered. Identical
+ group names, group gids, or uuids may result in undefined behavior.
+
+The functions getgrent(), getgrnam(), and getgrgid(), return a pointer to a
+group structure on success or NULL if the entry is not found or if an error
+occurs.  If an error does occur, errno will be set.  Note that programs must
+explicitly set errno to zero before calling any of these functions if they need
+to distinguish between a non-existent entry and an error.  The functions
+getgrnam_r(), getgrgid_r(), and getgruuid_r() return 0 if no error occurred, or
+an error number to indicate failure.  It is not an error if a matching entry is
+not found.  (Thus, if result is set to NULL and the return value is 0, no
+matching entry exists.)

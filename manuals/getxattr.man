@@ -1,0 +1,20 @@
+#include <sys/xattr.h>
+
+ssize_t getxattr(const char *path, const char *name, void *value, size_t size, u_int32_t position, int options);
+
+Extended attributes extend the basic attributes of files and directories in the file system.  They are stored as name:data pairs associated with file system objects (files, directories, symlinks, etc).
+
+The getxattr() function retrieves up to size bytes of data from the extended attribute identified by name associated with path into the pre-allocated buffer pointed to by value.  The function returns the number of bytes of data retrieved.
+
+An extended attribute's name is a simple NULL-terminated UTF-8 string.  position specifies an offset within the extended attribute.  In the current implementation, this argument is only used with the resource fork attribute.  For all other
+extended attributes, this parameter is reserved and should be zero.
+
+On success, value contains the data associated with name.  When value is set to NULL, getxattr() returns current size of the named attribute.  This facility can be used to determine the size of a buffer sufficiently large to hold the data cur-
+rently associated with the attribute.
+
+options specify options for retrieving extended attributes:
+
+XATTR_NOFOLLOW  do not follow symbolic links.  getxattr() normally returns information from the target of path if it is a symbolic link.  With this option, getxattr() will return extended attribute data from the symbolic link instead.
+
+XATTR_SHOWCOMPRESSION
+				getxattr() and fgetxattr() will return HFS Plus Compression extended attribute name (if present) for the file referred to by path or fd.
