@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ls_dirdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 13:03:52 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 13:07:16 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libls.h"
+#include "libls_dir.h"
 
-void		ls_del(t_ls **ls)
+void		ls_dirdel(t_dir **dir)
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
+	if (!dir || !*dir)
+		return ;
+	ls_elstdel(&((*dir)->elst));
+	ft_memdel((void **)dir);
 }

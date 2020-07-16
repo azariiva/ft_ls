@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_proc_files.c                                    :+:      :+:    :+:   */
+/*   ls_elstiter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/12 20:03:46 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/12 20:36:54 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 12:51:48 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 14:51:18 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libls.h"
+#include "libls_elist.h"
 
-void	ls_proc_files(t_ls *ls)
+void		ls_elstiter_f(t_elist *alst, void (*f)(t_entity *e))
 {
-	char				*ptr;
-	t_list				*entities;
-	t_list				*lst;
-	t_entity			entity;
+	t_dlist	*ptr;
 
-	entities = NULL;
-	ptr = ls->fnames - 1;
-	while (++ptr)
+	ptr = alst->head;
+	while (ptr)
 	{
-		if (lstat(ptr, &(entity.stat)) == -1)
-		{
-			ft_printf(NOT_FOUND, ptr);
-			continue;
-		}
+		f((t_entity *)ptr->content);
+		ptr = ptr->next;
+	}
+}
 
+void		ls_elstiter_b(t_elist *alst, void (*f)(t_entity *e))
+{
+	t_dlist	*ptr;
+
+	ptr = alst->tail;
+	while (ptr)
+	{
+		f((t_entity *)ptr->content);
+		ptr = ptr->prev;
 	}
 }

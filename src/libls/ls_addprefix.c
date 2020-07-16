@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ls_addprefix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 00:41:25 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 13:37:50 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libls.h"
 
-void		ls_del(t_ls **ls)
+char	*ls_addprefix(char *dname, char *fname)
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
+	char	*new;
+	char	dnl;
+
+	dnl = ft_strlen(dname);
+	if (!(new = ft_strnew(dnl + ft_strlen(fname) + 1)))
+		return (NULL);
+	ft_strcat(new, dname);
+	new[(unsigned)dnl] = '/';
+	ft_strcat(new, fname);
+	return (new);
 }

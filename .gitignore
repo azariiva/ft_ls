@@ -1,3 +1,5 @@
 *.dSYM
 ft_ls
 obj
+.DS_Store
+.vscode

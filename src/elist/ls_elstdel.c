@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ls_elstdel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 12:38:50 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 15:18:34 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libls.h"
+#include "libls_elist.h"
 
-void		ls_del(t_ls **ls)
+static void	del(void *content, size_t size)
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
+	if (size && content)
+		ls_entitydel((t_entity **)&content);
+}
+
+void		ls_elstdel(t_elist **alst)
+{
+	if (!alst || !*alst)
+		return ;
+	ft_dlstdel(&((*alst)->head), del);
+	(*alst)->tail = NULL;
+	ft_memdel((void **)alst);
+	*alst = NULL;
 }

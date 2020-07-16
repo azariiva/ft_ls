@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ls_elstnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 12:37:45 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 12:38:37 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libls.h"
+# include "libls_elist.h"
 
-void		ls_del(t_ls **ls)
+t_elist		*ls_elstnew(void)
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
+	t_elist	*new;
+
+	if (!(new = ft_memalloc(sizeof(t_elist))))
+		return (NULL);
+	return (new);
 }

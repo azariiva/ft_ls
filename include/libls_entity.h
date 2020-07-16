@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   libls_entity.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 12:32:09 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 14:53:18 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libls.h"
+#ifndef LIBLS_ENTITY_H
 
-void		ls_del(t_ls **ls)
+# define LIBLS_ENTITY_H
+
+# include "libft.h"
+# include "libls_dir.h"
+# include <sys/stat.h>
+
+typedef struct	s_entity
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
-}
+	char				*name;
+	struct stat			stat;
+	struct s_dir		*dir;
+}				t_entity;
+
+void			ls_entitydel(t_entity **e);
+int				ls_fillentity(t_entity *e, const char *name);
+
+#endif

@@ -6,17 +6,30 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 02:14:49 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/12 15:56:00 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 15:10:55 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libls.h"
 #include <unistd.h>
 
-int	ls_parse_argv(int ac, char*const av[], t_ls *ls)
+static int	ls_add(char *name, t_ls *ls)
 {
-	int		opt;
-	size_t	i;
+	int			rc;
+	t_entity	e;
+
+	if ((rc = ls_fillentity(&e, name)) == ERR)
+		return (ERR);
+	else if (rc == END)
+		ft_printf(NOT_FOUND, name);
+	else if (ls_elstadd(ls->elst, &e) == ERR)
+		return (ERR);
+	return (OK);
+}
+
+int			ls_parse_argv(int ac, char*const av[], t_ls *ls)
+{
+	int			opt;
 
 	while ((opt = ft_getopt(ac, av, FLAGS)) != -1)
 	{
@@ -26,16 +39,12 @@ int	ls_parse_argv(int ac, char*const av[], t_ls *ls)
 			ft_printf(USAGE, FLAGS);
 			return (ERR);
 		}
-		else
-			ls->flags[opt] = 1;
+		ls->flags[opt] = 1;
 	}
-	if (!(ls->fnames = ft_memalloc((ac - g_optind + 1) * sizeof(char*))))
-	{
-		ft_printf(ALC_ERR);
+	if (g_optind == ac && ls_add(".", ls) == ERR)
 		return (ERR);
-	}
-	i = -1;
 	while (g_optind < ac)
-		ls->fnames[++i] = av[g_optind++];
+		if (ls_add(av[g_optind++], ls) == ERR)
+			return (ERR);
 	return (OK);
 }

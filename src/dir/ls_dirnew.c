@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ls_dirnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 13:03:54 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 13:40:06 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libls.h"
+#include "libls_dir.h"
 
-void		ls_del(t_ls **ls)
+t_dir		*ls_dirnew(void)
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
+	t_dir	*new;
+
+	if (!(new = ft_memalloc(sizeof(t_dir))))
+		return(NULL);
+	if (!(new->elst = ls_elstnew()))
+	{
+		ls_dirdel(&new);
+		return (NULL);
+	}
+	return (new);
 }

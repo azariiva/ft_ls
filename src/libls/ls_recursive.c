@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ls_recursive.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 13:38:21 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libls.h"
 
-void		ls_del(t_ls **ls)
+void	ls_recursive(t_entity *e)
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
+	if (e)
+		return ;
 }

@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ls_fillentity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 12:55:59 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 15:24:11 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libls.h"
+#include "libls_entity.h"
 
-void		ls_del(t_ls **ls)
+int	ls_fillentity(t_entity *e, const char *name)
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
+	ft_bzero(e, sizeof(t_entity));
+	if (!e || !name)
+		return (ERR);
+	if (lstat(name, &(e->stat)) == -1)
+		return (END);
+	if (!(e->name = ft_strdup(name)))
+		return (ERR);
+	if (S_ISDIR(e->stat.st_mode) && !(e->dir = ls_dirnew()))
+	{
+		ft_strdel(&(e->name));
+		return (ERR);
+	}
+	return (OK);
 }

@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   ls_entitydel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 02:44:22 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:21 by blinnea          ###   ########.fr       */
+/*   Created: 2020/07/16 12:44:27 by blinnea           #+#    #+#             */
+/*   Updated: 2020/07/16 15:21:22 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libls.h"
+#include "libls_entity.h"
 
-void		ls_del(t_ls **ls)
+void		ls_entitydel(t_entity **e)
 {
-	ls_elstdel(&((*ls)->elst));
-	ft_memdel((void **)ls);
+	if (!e || !*e)
+		return ;
+	if ((*e)->dir)
+		ls_dirdel(&((*e)->dir));
+	if ((*e)->name)
+		ft_strdel(&((*e)->name));
+	ft_memdel((void **)e);
 }
