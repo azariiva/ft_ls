@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ls_fillentity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
+/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 12:55:59 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 20:26:59 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/16 21:31:36 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libls_entity.h"
 
-int	ls_fillentity(t_entity *e, const char *name, const char *dpath)
+int	ls_fillentity(t_entity *e, const char *name, const char *dpath,
+const char *flags)
 {
 	ft_bzero(e, sizeof(t_entity));
 	if (!e || !name)
 		return (ERR);
+	if (!flags['a'] && name[0] == '.')
+		return (END);
 	if (!(e->name = ft_strdup(name)))
 		return (ERR);
 	if (!(e->path = ls_addprefix(dpath, name)))

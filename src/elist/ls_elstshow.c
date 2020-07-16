@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_elstshow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
+/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/07/16 20:31:35 by lhitmonc         ###   ########.fr       */
-=======
-/*   Updated: 2020/07/16 19:36:31 by blinnea          ###   ########.fr       */
->>>>>>> refs/remotes/origin/master
+/*   Updated: 2020/07/16 21:22:38 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +133,7 @@ static size_t	len(size_t n)
 	return (l);
 }
 
-void			ls_elstshow(t_elist *alst, char order)
+void			ls_elstshow(t_elist *alst, char *flags)
 {
 	size_t		maxhl;
 	size_t		maxsz;
@@ -167,9 +163,8 @@ void			ls_elstshow(t_elist *alst, char order)
 			maxusr = t;
 		ptr = ptr->next;
 	}
-	if (order == 0)
-		show_direct(alst->head, len(maxhl), len(maxsz), maxgrp, maxusr);
-	else
-		show_reverse(alst->tail, len(maxhl), len(maxsz), maxgrp, maxusr);
+	(flags['r'] ?
+	show_reverse(alst->tail, len(maxhl), len(maxsz), maxgrp, maxusr) :
+	show_direct(alst->head, len(maxhl), len(maxsz), maxgrp, maxusr));
 	ft_printf("\n");
 }

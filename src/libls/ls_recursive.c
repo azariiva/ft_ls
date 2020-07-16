@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ls_recursive.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
+/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 20:31:12 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/16 21:30:38 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libls.h"
 
-int		ls_recursive_direct(t_elist *elst, int order)
+int		ls_recursive_direct(t_elist *elst, char *flags)
 {
 	t_dlist	*ptr;
 
@@ -22,14 +22,14 @@ int		ls_recursive_direct(t_elist *elst, int order)
 		if (S_ISDIR(((t_entity *)ptr->content)->stat.st_mode) &&
 		ft_strcmp(((t_entity *)ptr->content)->name, ".") &&
 		ft_strcmp(((t_entity *)ptr->content)->name, ".."))
-			if (ls_recursive((t_entity *)ptr->content, order) == ERR)
+			if (ls_recursive((t_entity *)ptr->content, flags) == ERR)
 				return (ERR);
 		ptr = ptr->next;
 	}
 	return (OK);
 }
 
-int		ls_recursive_reverse(t_elist *elst, int order)
+int		ls_recursive_reverse(t_elist *elst, char *flags)
 {
 	t_dlist	*ptr;
 
@@ -39,14 +39,14 @@ int		ls_recursive_reverse(t_elist *elst, int order)
 		if (S_ISDIR(((t_entity *)ptr->content)->stat.st_mode) &&
 		ft_strcmp(((t_entity *)ptr->content)->name, ".") &&
 		ft_strcmp(((t_entity *)ptr->content)->name, ".."))
-			if (ls_recursive((t_entity *)ptr->content, order) == ERR)
+			if (ls_recursive((t_entity *)ptr->content, flags) == ERR)
 				return (ERR);
 		ptr = ptr->prev;
 	}
 	return (OK);
 }
 
-int		ls_recursive(t_entity *d, int order)
+int		ls_recursive(t_entity *d, char *flags)
 {
 	DIR				*dir;
 	struct dirent	*dirent;
@@ -57,7 +57,7 @@ int		ls_recursive(t_entity *d, int order)
 	dir = opendir(d->path);
 	while ((dirent = readdir(dir)))
 	{
-		if (ls_fillentity(&e, dirent->d_name, d->path) == ERR)
+		if (ls_fillentity(&e, dirent->d_name, d->path, flags) == ERR)
 			return (ERR);
 		if (ls_elstadd(d->elst, &e) == ERR)
 		{
@@ -71,9 +71,9 @@ int		ls_recursive(t_entity *d, int order)
 	ft_printf("%s:\n", d->path);
 	ft_printf("total: %zu\n", total);
 	closedir(dir);
-	ls_elstshow(d->elst, order);
-	if ((order ? ls_recursive_reverse(d->elst, order) :
-	ls_recursive_direct(d->elst, order)) == ERR)
+	ls_elstshow(d->elst, flags);
+	if ((flags['r'] ? ls_recursive_reverse(d->elst, flags) :
+	ls_recursive_direct(d->elst, flags)) == ERR)
 	{
 		ls_elstdel(&(d->elst));
 		return (ERR);
