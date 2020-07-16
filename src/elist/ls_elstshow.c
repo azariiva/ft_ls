@@ -6,11 +6,7 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/07/16 20:31:35 by lhitmonc         ###   ########.fr       */
-=======
-/*   Updated: 2020/07/16 19:36:31 by blinnea          ###   ########.fr       */
->>>>>>> refs/remotes/origin/master
+/*   Updated: 2020/07/16 20:51:31 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +87,8 @@ size_t galgn, size_t ualgn)
 		u_name = getpwuid(stat.st_uid)->pw_name;
 		get_ftype(stat.st_mode, p);
 		get_perm(stat.st_mode, p);
-		ft_printf("%s %*zu %*s %*s %*zu %s %s\n", p, hlalgn, stat.st_nlink,
-		galgn, gr_name, ualgn, u_name, szalgn, stat.st_size, get_time(stat),
+		ft_printf("%s %*zu %*s %*s  %*zu %s %s\n", p, hlalgn, stat.st_nlink,
+		ualgn, u_name, galgn, gr_name, szalgn, stat.st_size, get_time(stat),
 		name);
 		ptr = ptr->next;
 	}
