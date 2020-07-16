@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_elstshow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:58:27 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 20:31:35 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,4 +157,5 @@ void			ls_elstshow(t_elist *alst, char order)
 		show_direct(alst->head, len(maxhl), len(maxsz), maxgrp, maxusr);
 	else
 		show_reverse(alst->tail, len(maxhl), len(maxsz), maxgrp, maxusr);
+	ft_printf("\n");
 }

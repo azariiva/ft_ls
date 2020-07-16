@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_parse_argv.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 02:14:49 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 15:10:55 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 20:35:47 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ls_add(char *name, t_ls *ls)
 	int			rc;
 	t_entity	e;
 
-	if ((rc = ls_fillentity(&e, name)) == ERR)
+	if ((rc = ls_fillentity(&e, name, NULL)) == ERR)
 		return (ERR);
 	else if (rc == END)
 		ft_printf(NOT_FOUND, name);
