@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 21:30:38 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 21:42:08 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,25 @@ int		ls_recursive(t_entity *d, char *flags)
 	struct dirent	*dirent;
 	t_entity		e;
 	size_t			total;
+	int				rc;
 
 	total = 0;
 	dir = opendir(d->path);
 	while ((dirent = readdir(dir)))
 	{
-		if (ls_fillentity(&e, dirent->d_name, d->path, flags) == ERR)
+		if ((rc = ls_fillentity(&e, dirent->d_name, d->path, flags)) == ERR)
 			return (ERR);
-		if (ls_elstadd(d->elst, &e) == ERR)
+		if (rc == OK)
 		{
-			ft_strdel(&(e.name));
-			ft_strdel(&(e.path));
-			ls_elstdel(&(e.elst));
-			return (ERR);
+			if (ls_elstadd(d->elst, &e) == ERR)
+			{
+				ft_strdel(&(e.name));
+				ft_strdel(&(e.path));
+				ls_elstdel(&(e.elst));
+				return (ERR);
+			}
+			total += e.stat.st_blocks;
 		}
-		total += e.stat.st_blocks;
 	}
 	ft_printf("%s:\n", d->path);
 	ft_printf("total: %zu\n", total);
