@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 20:10:03 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 15:25:14 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 16:02:16 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 # define LIBLS_H
 
-# include "libls_dir.h"
 # include "libls_entity.h"
 # include "libls_elist.h"
 # include "libft.h"

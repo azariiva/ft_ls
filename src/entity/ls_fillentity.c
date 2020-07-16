@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 12:55:59 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 15:24:11 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 16:03:49 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ls_fillentity(t_entity *e, const char *name)
 		return (END);
 	if (!(e->name = ft_strdup(name)))
 		return (ERR);
-	if (S_ISDIR(e->stat.st_mode) && !(e->dir = ls_dirnew()))
+	if (S_ISDIR(e->stat.st_mode) && !(e->elst = ls_elstnew()))
 	{
 		ft_strdel(&(e->name));
 		return (ERR);
