@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libls_entity.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 12:32:09 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 16:03:24 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 20:13:05 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,17 @@ typedef struct s_elist	t_elist;
 typedef struct			s_entity
 {
 	char				*name;
+	char				*path;
 	struct stat			stat;
 	t_elist				*elst;
 }						t_entity;
 
 void					ls_entitydel(t_entity **e);
-int						ls_fillentity(t_entity *e, const char *name);
+int						ls_fillentity(t_entity *e, const char *name,
+const char *dpath);
+char					*ls_addprefix(const char *dname, const char *fname);
+int						ls_recursive_direct(t_elist *elst, int order);
+int						ls_recursive_reverse(t_elist *elst, int order);
+int						ls_recursive(t_entity *d, int order);
 
 #endif

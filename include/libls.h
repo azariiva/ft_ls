@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 20:10:03 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 16:02:16 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 20:06:06 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			ls_del(t_ls **ls);
 t_ls			*ls_new(void);
 int				ls_parse_argv(int ac, char*const av[], t_ls *ls);
 
-char			*ls_addprefix(char *dname, char *fname);
+char			*ls_addprefix(const char *dname, const char *fname);
 void			ls_showinfo(t_entity *e);
 
 #endif
