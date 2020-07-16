@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 14:58:27 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 19:36:31 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,18 @@ static void		get_perm(mode_t st_mode, char *p)
 static char		*get_time(struct stat stat)
 {
 	char	*t;
+	time_t	cur;
+	char	*cs;
 
-	t = (ctime(&(stat.st_mtime)) + 4);
+	cur = time(NULL);
+	cs = ft_strdup(ctime(&cur));
+	t = ctime(&(stat.st_mtime)) + 4;
+	if (ft_strcmp(t + 16, cs + 20))
+	{
+		t[7] = ' ';
+		ft_strcpy(t + 8, t + 16);
+	}
+	ft_strdel(&cs);
 	t[12] = 0;
 	return (t);
 }
