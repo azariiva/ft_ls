@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 21:22:38 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/16 21:36:16 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ size_t galgn, size_t ualgn)
 		u_name = getpwuid(stat.st_uid)->pw_name;
 		get_ftype(stat.st_mode, p);
 		get_perm(stat.st_mode, p);
-		ft_printf("%s %*zu %*s %*s %*zu %s %s\n", p, hlalgn, stat.st_nlink,
-		galgn, gr_name, ualgn, u_name, szalgn, stat.st_size, get_time(stat),
+		ft_printf("%s %*zu %*s %*s  %*zu %s %s\n", p, hlalgn, stat.st_nlink,
+		ualgn, u_name, galgn, gr_name, szalgn, stat.st_size, get_time(stat),
 		name);
 		ptr = ptr->next;
 	}
