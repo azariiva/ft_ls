@@ -6,7 +6,7 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 15:47:31 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:05:24 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		show_direct(t_dlist *ptr, size_t max[4], char *flags)
 			ptr = ptr->next;
 			continue;
 		}
-		ls_entityshow((t_entity *)ptr->content, max);
+		ls_entityshow((t_entity *)ptr->content, max, flags);
 		ptr = ptr->next;
 	}
 }
@@ -59,7 +59,7 @@ static void		show_reverse(t_dlist *ptr, size_t max[4], char *flags)
 			ptr = ptr->prev;
 			continue;
 		}
-		ls_entityshow((t_entity *)ptr->content, max);
+		ls_entityshow((t_entity *)ptr->content, max, flags);
 		ptr = ptr->prev;
 	}
 }

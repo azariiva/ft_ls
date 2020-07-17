@@ -6,7 +6,7 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:03:15 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 14:55:38 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:04:53 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <uuid/uuid.h>
 #include <pwd.h>
 #include <time.h>
+#include <sys/xattr.h>
 #include <sys/stat.h>
 
 static char	*get_time(time_t t)
@@ -36,8 +37,11 @@ static char	*get_time(time_t t)
 	return (t_str);
 }
 
-static void	get_perm(mode_t m, char *p)
+static void	get_perm(char *p, t_entity *e)
 {
+	mode_t	m;
+
+	m = e->stat.st_mode;
 	p[1] = ((m & S_IRUSR) ? 'r' : '-');
 	p[2] = ((m & S_IWUSR) ? 'w' : '-');
 	p[3] = ((m & S_IXUSR) ? 'x' : '-');
@@ -47,7 +51,7 @@ static void	get_perm(mode_t m, char *p)
 	p[7] = ((m & S_IROTH) ? 'r' : '-');
 	p[8] = ((m & S_IWOTH) ? 'w' : '-');
 	p[9] = ((m & S_IXOTH) ? 'x' : '-');
-	p[10] = ' '; // here goes the @
+	p[10] = ((listxattr(e->path, NULL, 0, XATTR_NOFOLLOW) > 0) ? '@' : ' ');
 	p[11] = 0;
 }
 
@@ -71,13 +75,17 @@ static void	get_ftype(mode_t m, char *p)
 		p[0] = '?';
 }
 
-void		ls_entityshow(t_entity *e, size_t a[4])
+void		ls_entityshow(t_entity *e, size_t a[4], char *flags)
 {
 	char		p[12];
 
 	get_ftype(e->stat.st_mode, p);
-	get_perm(e->stat.st_mode, p);
-	ft_printf("%s %*zu %*s  %*s  %*zu %s %s\n", p, a[0], e->stat.st_nlink, a[2],
-	getpwuid(e->stat.st_uid)->pw_name, a[1], getgrgid(e->stat.st_gid)->gr_name,
-	a[3], e->stat.st_size, get_time(e->stat.st_mtime), e->name);
+	get_perm(p, e);
+	if (flags['l'])
+		ft_printf("%s %*zu %*s  %*s  %*zu %s %s\n", p, a[0], e->stat.st_nlink,
+		a[2], getpwuid(e->stat.st_uid)->pw_name, a[1],
+		getgrgid(e->stat.st_gid)->gr_name, a[3], e->stat.st_size,
+		get_time(e->stat.st_mtime), e->name);
+	else
+		ft_printf("%s\t", e->name);
 }
