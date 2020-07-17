@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
+/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:41:46 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:59:30 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 19:13:03 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libls.h"
 #include <dirent.h>
 
-int		mnepank(t_elist *elst, char *flags, int *ds)
+static int	mnepank(t_elist *elst, char *flags, int *ds)
 {
 	t_dlist	*ptr;
 	char	d;
@@ -32,7 +32,7 @@ int		mnepank(t_elist *elst, char *flags, int *ds)
 	return (OK);
 }
 
-int		yapohui(t_elist *elst, char *flags, int *ds)
+static int	yapohui(t_elist *elst, char *flags, int *ds)
 {
 	t_dlist	*ptr;
 	char	d;
@@ -51,26 +51,20 @@ int		yapohui(t_elist *elst, char *flags, int *ds)
 	return (OK);
 }
 
-// int			ls_show_direct(t_dlist *head)
-// {
-// 	mode_t	st_mode;
-// 	t_dlist	*ptr;
-
-// 	ptr = head;
-// 	while (ptr)
-// 	{
-// 		st_mode = ((t_entity *)head->content)->stat.st_mode;
-// 		if (!S_ISDIR(st_mode))
-// 			ls_entityshow((t_entity *)head->content);
-// 		ptr = ptr->next;
-// 	}
-
-// }
-
-// int			ls_show_reverse(t_dlist *tail)
-// {
-
-// }
+static void	billy(t_ls *ls, int f, int ds)
+{
+	if (ls->flags['f'])
+	{
+		(ls->flags['t'] ? ls_elstsort(ls->elst, cmp_time) : 0);
+		(ls->flags['S'] ? ls_elstsort(ls->elst, cmp_fsize) : 0);
+		ls->flags['a'] = 1;
+	}
+	ls_elstshow(ls->elst, ls->flags);
+	if (ds && f && !ls->flags['d'])
+		ft_printf("\n");
+	if (ds == 1 && !f)
+		ls->flags[0] = 1;
+}
 
 int			main(int ac, char*const av[])
 {
@@ -88,18 +82,7 @@ int			main(int ac, char*const av[])
 		ls_del(&ls);
 		return (0);
 	}
-	if (ls->flags['t'])
-		ls_elstsort(ls->elst, cmp_time);
-	if (ls->flags['S'])
-		ls_elstsort(ls->elst, cmp_fsize);
-	ls_elstshow(ls->elst, ls->flags);
-	if (!ls->flags['l'] && f)
-		ft_printf("\n");
-	if (ds && f)
-		ft_printf("\n");
-	// ft_printf("ds: %d\nf: %d\n", ds, f);
-	if (ds == 1 && !f)
-		ls->flags[0] = 1;
+	billy(ls, f, ds);
 	if (ds)
 		ds--;
 	(ls->flags['r'] ? yapohui(ls->elst, ls->flags, &ds) :

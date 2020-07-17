@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_elstshow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
+/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:21:51 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 18:24:23 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			ls_elstshow(t_elist *alst, char *flags)
 	size_t		t;
 	struct stat	stat;
 	t_dlist		*ptr;
+
 	ft_bzero(max, sizeof(max));
 	if (!alst || !alst->head)
 		return ;

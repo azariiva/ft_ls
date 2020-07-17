@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_recursive.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
+/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 18:09:32 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 19:12:57 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ int		ls_recursive(t_entity *d, char *flags, int *ds)
 	(flags['S'] ? ls_elstsort(d->elst, cmp_fsize) : 0);
 	ls_elstshow(d->elst, flags);
 	if (*ds)
-		ft_printf("\n");
-	if (!flags['l'])
 		ft_printf("\n");
 	if (*ds)
 		(*ds)--;
