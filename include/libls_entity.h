@@ -6,7 +6,7 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 12:32:09 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:02:59 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:21:34 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ const char *dpath, const char *flags);
 void					ls_entityshow(t_entity *e, size_t a[4], char *flags);
 
 char					*ls_addprefix(const char *dname, const char *fname);
-int						ls_recursive_direct(t_elist *elst, char *order);
-int						ls_recursive_reverse(t_elist *elst, char *order);
-int						ls_recursive(t_entity *d, char *order);
+int						ls_recursive_direct(t_elist *elst, char *order,
+int *ds);
+int						ls_recursive_reverse(t_elist *elst, char *order,
+int *ds);
+int						ls_recursive(t_entity *d, char *order,
+int *ds);
 
 #endif

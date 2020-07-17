@@ -6,13 +6,13 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:06:54 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:28:12 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libls.h"
 
-int		ls_recursive_direct(t_elist *elst, char *flags)
+int		ls_recursive_direct(t_elist *elst, char *flags, int *ds)
 {
 	t_dlist	*ptr;
 
@@ -22,14 +22,14 @@ int		ls_recursive_direct(t_elist *elst, char *flags)
 		if (S_ISDIR(((t_entity *)ptr->content)->stat.st_mode) &&
 		ft_strcmp(((t_entity *)ptr->content)->name, ".") &&
 		ft_strcmp(((t_entity *)ptr->content)->name, ".."))
-			if (ls_recursive((t_entity *)ptr->content, flags) == ERR)
+			if (ls_recursive((t_entity *)ptr->content, flags, ds) == ERR)
 				return (ERR);
 		ptr = ptr->next;
 	}
 	return (OK);
 }
 
-int		ls_recursive_reverse(t_elist *elst, char *flags)
+int		ls_recursive_reverse(t_elist *elst, char *flags, int *ds)
 {
 	t_dlist	*ptr;
 
@@ -39,14 +39,14 @@ int		ls_recursive_reverse(t_elist *elst, char *flags)
 		if (S_ISDIR(((t_entity *)ptr->content)->stat.st_mode) &&
 		ft_strcmp(((t_entity *)ptr->content)->name, ".") &&
 		ft_strcmp(((t_entity *)ptr->content)->name, ".."))
-			if (ls_recursive((t_entity *)ptr->content, flags) == ERR)
+			if (ls_recursive((t_entity *)ptr->content, flags, ds) == ERR)
 				return (ERR);
 		ptr = ptr->prev;
 	}
 	return (OK);
 }
 
-int		ls_recursive(t_entity *d, char *flags)
+int		ls_recursive(t_entity *d, char *flags, int *ds)
 {
 	DIR				*dir;
 	struct dirent	*dirent;
@@ -69,18 +69,24 @@ int		ls_recursive(t_entity *d, char *flags)
 				ls_elstdel(&(e.elst));
 				return (ERR);
 			}
+			if (e.elst && flags['R'])
+				(*ds)++;
 			total += e.stat.st_blocks;
 		}
 	}
-	ft_printf("%s:\n", d->path);
-	if (flags['l'])
-		ft_printf("total: %zu\n", total);
+	if (!flags[0])
+		ft_printf("%s:\n", d->path);
+	ft_printf("total: %zu\n", total);
 	closedir(dir);
 	(flags['t'] ? ls_elstsort(d->elst, cmp_time) : 0);
 	(flags['S'] ? ls_elstsort(d->elst, cmp_fsize) : 0);
 	ls_elstshow(d->elst, flags);
-	if (flags['R'] && (flags['r'] ? ls_recursive_reverse(d->elst, flags) :
-	ls_recursive_direct(d->elst, flags)) == ERR)
+	if (*ds)
+		ft_printf("\n");
+	if (*ds)
+		(*ds)--;
+	if (flags['R'] && (flags['r'] ? ls_recursive_reverse(d->elst, flags, ds) :
+	ls_recursive_direct(d->elst, flags, ds)) == ERR)
 	{
 		ls_elstdel(&(d->elst));
 		return (ERR);

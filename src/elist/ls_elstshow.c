@@ -6,7 +6,7 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:05:24 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:21:51 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,12 @@ void			ls_elstshow(t_elist *alst, char *flags)
 	size_t		t;
 	struct stat	stat;
 	t_dlist		*ptr;
-	static int	puck; //
-
 	ft_bzero(max, sizeof(max));
 	if (!alst || !alst->head)
 		return ;
 	ptr = alst->head;
 	while (ptr)
 	{
-		puck++; //
 		stat = ((t_entity *)ptr->content)->stat;
 		if (!flags['d'] && S_ISDIR(stat.st_mode))
 		{
@@ -97,6 +94,4 @@ void			ls_elstshow(t_elist *alst, char *flags)
 	}
 	(flags['r'] ? show_reverse(alst->tail, max, flags) :
 	show_direct(alst->head, max, flags));
-	if(puck > 1) //
-		ft_printf("\n");
 }
