@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:41:46 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 19:13:03 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 19:30:00 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ static void	billy(t_ls *ls, int f, int ds)
 {
 	if (ls->flags['f'])
 	{
-		(ls->flags['t'] ? ls_elstsort(ls->elst, cmp_time) : 0);
-		(ls->flags['S'] ? ls_elstsort(ls->elst, cmp_fsize) : 0);
+		ls->flags['t'] = 0;
+		ls->flags['S'] = 0;
+		ls->flags['r'] = 0;
 		ls->flags['a'] = 1;
 	}
+	(ls->flags['t'] ? ls_elstsort(ls->elst, cmp_time) : 0);
+	(ls->flags['S'] ? ls_elstsort(ls->elst, cmp_fsize) : 0);
+	ls->flags['a'] = 1;
 	ls_elstshow(ls->elst, ls->flags);
 	if (ds && f && !ls->flags['d'])
 		ft_printf("\n");

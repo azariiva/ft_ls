@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ls_recursive.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 19:12:57 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 19:25:39 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libls.h"
+#include <unistd.h>
 
 int		ls_recursive_direct(t_elist *elst, char *flags, int *ds)
 {
@@ -60,7 +61,8 @@ int		ls_recursive(t_entity *d, char *flags, int *ds)
 	flags[0] = 0;
 	if (!(dir = opendir(d->path)))
 	{
-		ft_printf(PERM_DENIED, d->name);
+		ft_printf_fd(STDERR_FILENO, PERM_DENIED, d->name);
+		ft_printf("\n");
 		if (*ds)
 			(*ds)--;
 		return (OK);
@@ -85,7 +87,7 @@ int		ls_recursive(t_entity *d, char *flags, int *ds)
 		}
 	}
 	if (flags['l'])
-		ft_printf("total: %zu\n", total);
+		ft_printf("total %zu\n", total);
 	closedir(dir);
 	(flags['t'] ? ls_elstsort(d->elst, cmp_time) : 0);
 	(flags['S'] ? ls_elstsort(d->elst, cmp_fsize) : 0);
