@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:03:15 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 19:11:36 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 19:15:25 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static void	print_lnk(t_entity *e)
 {
 	char	buf[PATH_MAX + 1];
 
+	ft_bzero(buf, PATH_MAX + 1);
 	if (!S_ISLNK(e->stat.st_mode))
 	{
 		ft_printf("\n");
