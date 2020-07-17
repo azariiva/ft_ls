@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/16 21:42:08 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 14:04:40 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		ls_recursive(t_entity *d, char *flags)
 	ft_printf("total: %zu\n", total);
 	closedir(dir);
 	ls_elstshow(d->elst, flags);
-	if ((flags['r'] ? ls_recursive_reverse(d->elst, flags) :
+	if (flags['R'] && (flags['r'] ? ls_recursive_reverse(d->elst, flags) :
 	ls_recursive_direct(d->elst, flags)) == ERR)
 	{
 		ls_elstdel(&(d->elst));
