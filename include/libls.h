@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 20:10:03 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 14:17:59 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 15:40:22 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <pwd.h>
 # include <time.h>
 
-# define FLAGS "lRartd"
+# define FLAGS "lRartdS"
 # define USAGE "usage: ft_ls [-%s] [file ...]\n"
 # define ILLEGAL_OPT "ft_ls: illegal option -- %c\n"
 # define ALC_ERR "ft_ls: allocation error\n"
@@ -44,5 +44,8 @@ int				ls_parse_argv(int ac, char*const av[], t_ls *ls);
 
 char			*ls_addprefix(const char *dname, const char *fname);
 void			ls_showinfo(t_entity *e);
+
+int				cmp_fsize(t_dlist *a, t_dlist *b);
+int				cmp_time(t_dlist *a, t_dlist *b);
 
 #endif

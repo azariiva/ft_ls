@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:41:46 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 14:17:07 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 15:42:35 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ int			main(int ac, char*const av[])
 		ls_del(&ls);
 		return (0);
 	}
+	if (ls->flags['t'])
+		ls_elstsort(ls->elst, cmp_time);
+	if (ls->flags['S'])
+		ls_elstsort(ls->elst, cmp_fsize);
 	ls_elstshow(ls->elst, ls->flags);
 	(ls->flags['r'] ? yapohui(ls->elst, ls->flags) :
 	mnepank(ls->elst, ls->flags));

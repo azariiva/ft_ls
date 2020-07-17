@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 12:29:08 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 13:44:08 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 15:17:23 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void					ls_elstiter_b(t_elist *alst, void (*f)(t_entity *e));
 ** max[4] = {maxhl, maxgrp, maxusr, maxsz};
 */
 void					ls_elstshow(t_elist *alst, char *flags);
+void					ls_elstsort(t_elist *alst,
+int (*cmp)(t_dlist *, t_dlist *));
 
 #endif
