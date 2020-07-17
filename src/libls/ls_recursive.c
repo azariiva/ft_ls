@@ -6,7 +6,7 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:28:12 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:29:14 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int		ls_recursive(t_entity *d, char *flags, int *ds)
 	}
 	if (!flags[0])
 		ft_printf("%s:\n", d->path);
-	ft_printf("total: %zu\n", total);
+	if (flags['l'])
+		ft_printf("total: %zu\n", total);
 	closedir(dir);
 	(flags['t'] ? ls_elstsort(d->elst, cmp_time) : 0);
 	(flags['S'] ? ls_elstsort(d->elst, cmp_fsize) : 0);
