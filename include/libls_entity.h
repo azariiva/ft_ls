@@ -6,7 +6,7 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 12:32:09 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:21:34 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:46:21 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "libft.h"
 # include "libls_elist.h"
 # include <sys/stat.h>
+
+# define PERM_DENIED "ls: %s: Permission denied\n"
+# define NOT_FOUND "ls: %s: No such file or directory\n"
 
 typedef struct s_elist	t_elist;
 

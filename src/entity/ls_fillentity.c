@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_fillentity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 12:55:59 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 13:41:12 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 17:52:56 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ const char *flags)
 	}
 	if (lstat(e->path, &(e->stat)) == -1)
 	{
+		ft_printf(NOT_FOUND, e->path);
 		ft_strdel(&(e->name));
 		ft_strdel(&(e->path));
 		return (END);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:41:46 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:18:49 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 17:59:30 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,12 @@ int			main(int ac, char*const av[])
 	if (ls->flags['S'])
 		ls_elstsort(ls->elst, cmp_fsize);
 	ls_elstshow(ls->elst, ls->flags);
-	if (ds & f)
+	if (!ls->flags['l'] && f)
 		ft_printf("\n");
-	if (ds == 1 && f == 0 && !ls->flags['R'])
+	if (ds && f)
+		ft_printf("\n");
+	// ft_printf("ds: %d\nf: %d\n", ds, f);
+	if (ds == 1 && !f)
 		ls->flags[0] = 1;
 	if (ds)
 		ds--;

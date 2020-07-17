@@ -6,7 +6,7 @@
 /*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 17:14:25 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 17:29:14 by lhitmonc         ###   ########.fr       */
+/*   Updated: 2020/07/17 18:09:32 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,16 @@ int		ls_recursive(t_entity *d, char *flags, int *ds)
 	int				rc;
 
 	total = 0;
-	dir = opendir(d->path);
+	if (!flags[0])
+		ft_printf("%s:\n", d->path);
+	flags[0] = 0;
+	if (!(dir = opendir(d->path)))
+	{
+		ft_printf(PERM_DENIED, d->name);
+		if (*ds)
+			(*ds)--;
+		return (OK);
+	}
 	while ((dirent = readdir(dir)))
 	{
 		if ((rc = ls_fillentity(&e, dirent->d_name, d->path, flags)) == ERR)
@@ -69,13 +78,12 @@ int		ls_recursive(t_entity *d, char *flags, int *ds)
 				ls_elstdel(&(e.elst));
 				return (ERR);
 			}
-			if (e.elst && flags['R'])
+			if (ft_strcmp(dirent->d_name, ".") &&
+			ft_strcmp(dirent->d_name, "..") && e.elst && flags['R'])
 				(*ds)++;
 			total += e.stat.st_blocks;
 		}
 	}
-	if (!flags[0])
-		ft_printf("%s:\n", d->path);
 	if (flags['l'])
 		ft_printf("total: %zu\n", total);
 	closedir(dir);
@@ -83,6 +91,8 @@ int		ls_recursive(t_entity *d, char *flags, int *ds)
 	(flags['S'] ? ls_elstsort(d->elst, cmp_fsize) : 0);
 	ls_elstshow(d->elst, flags);
 	if (*ds)
+		ft_printf("\n");
+	if (!flags['l'])
 		ft_printf("\n");
 	if (*ds)
 		(*ds)--;

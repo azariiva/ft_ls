@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lhitmonc <lhitmonc@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 20:10:03 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 16:50:39 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 17:46:07 by lhitmonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # define USAGE "usage: ft_ls [-%s] [file ...]\n"
 # define ILLEGAL_OPT "ft_ls: illegal option -- %c\n"
 # define ALC_ERR "ft_ls: allocation error\n"
-# define NOT_FOUND "ls: %s: No such file or directory\n"
-# define PERM_DENIED "ls: %s: Permission denied\n"
 
 typedef struct	s_ls
 {
