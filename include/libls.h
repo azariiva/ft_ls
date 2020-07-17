@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 20:10:03 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 18:48:36 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 20:14:16 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct	s_ls
 
 void			ls_del(t_ls **ls);
 t_ls			*ls_new(void);
-int				ls_parse_argv(int ac, char*const av[], t_ls *ls, int *ds  );
+int				ls_parse_argv(int ac, char*const av[], t_ls *ls, int *ds);
 
 char			*ls_addprefix(const char *dname, const char *fname);
 void			ls_showinfo(t_entity *e);

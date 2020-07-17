@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:03:15 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 19:15:25 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 19:32:53 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@
 #include <sys/stat.h>
 #include <limits.h>
 #include <unistd.h>
-
-// # include <dirent.h>
-// # include <sys/stat.h>
-// # include <pwd.h>
-// # include <grp.h>
-// # include <uuid/uuid.h>
-// # include <time.h>
-// # include <sys/types.h>
-// # include <sys/acl.h>
-// # include <sys/xattr.h>
-// # include <limits.h>
-// # include <sys/ioctl.h>
 
 static char	*get_time(time_t t)
 {

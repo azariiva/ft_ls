@@ -6,7 +6,7 @@
 /*   By: blinnea <blinnea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:08:34 by blinnea           #+#    #+#             */
-/*   Updated: 2020/07/17 18:24:23 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/07/17 19:43:58 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static size_t	len(size_t n)
 	return (l);
 }
 
-static void		show_direct(t_dlist *ptr, size_t max[4], char *flags)
+static void		sd(t_dlist *ptr, size_t max[4], char *flags)
 {
 	max[0] = len(max[0]);
 	max[3] = len(max[3]);
@@ -48,7 +48,7 @@ static void		show_direct(t_dlist *ptr, size_t max[4], char *flags)
 	}
 }
 
-static void		show_reverse(t_dlist *ptr, size_t max[4], char *flags)
+static void		sr(t_dlist *ptr, size_t max[4], char *flags)
 {
 	max[0] = len(max[0]);
 	max[3] = len(max[3]);
@@ -64,10 +64,23 @@ static void		show_reverse(t_dlist *ptr, size_t max[4], char *flags)
 	}
 }
 
+static void		helper(struct stat stat, size_t *max)
+{
+	size_t	t;
+
+	if ((size_t)stat.st_nlink > max[0])
+		max[0] = stat.st_nlink;
+	if ((size_t)stat.st_size > max[3])
+		max[3] = stat.st_size;
+	if ((t = ft_strlen(getgrgid(stat.st_gid)->gr_name)) > max[1])
+		max[1] = t;
+	if ((t = ft_strlen(getpwuid(stat.st_uid)->pw_name)) > max[2])
+		max[2] = t;
+}
+
 void			ls_elstshow(t_elist *alst, char *flags)
 {
 	size_t		max[4];
-	size_t		t;
 	struct stat	stat;
 	t_dlist		*ptr;
 
@@ -77,22 +90,13 @@ void			ls_elstshow(t_elist *alst, char *flags)
 	ptr = alst->head;
 	while (ptr)
 	{
-		stat = ((t_entity *)ptr->content)->stat;
 		if (!flags['d'] && S_ISDIR(stat.st_mode))
 		{
 			ptr = ptr->next;
 			continue;
 		}
-		if ((size_t)stat.st_nlink > max[0])
-			max[0] = stat.st_nlink;
-		if ((size_t)stat.st_size > max[3])
-			max[3] = stat.st_size;
-		if ((t = ft_strlen(getgrgid(stat.st_gid)->gr_name)) > max[1])
-			max[1] = t;
-		if ((t = ft_strlen(getpwuid(stat.st_uid)->pw_name)) > max[2])
-			max[2] = t;
+		helper(((t_entity *)ptr->content)->stat, max);
 		ptr = ptr->next;
 	}
-	(flags['r'] ? show_reverse(alst->tail, max, flags) :
-	show_direct(alst->head, max, flags));
+	(flags['r'] ? sr(alst->tail, max, flags) : sd(alst->head, max, flags));
 }
